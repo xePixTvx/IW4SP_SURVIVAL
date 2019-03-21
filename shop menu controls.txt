@@ -1,0 +1,29 @@
+PC:
+	Host Player(player1 on sp maps your are always player1):
+			Scroll Up: Arrow Key Up
+			Scroll Down: Arrow Key Down
+			Select: Enter or Enter on keypad
+			Back/Exit: Backspace
+	
+	Player 2:
+			Scroll Up: Aim(Right Mouse Button)
+			Scroll Down: Attack(Left Mouse Button)
+			Select: Activate(default binded to F)
+			Back/Exit: Melee(default binded to V or E)
+
+
+-------------------------------------------------------------------------------------------------------------------------
+
+
+PS3:
+	Host Player(player1 on sp maps your are always player1):
+			Scroll Up: Dpad Up or Thumbsticks Up
+			Scroll Down: Dpad Down or Thumbsticks Down
+			Select: A(default binded to X)
+			Back/Exit: B(default binded to O)
+
+	Player 2:
+			Scroll Up: Actionslot 1(default binded to Dpad Up)
+			Scroll Down: Actionslot 2(default binded to Dpad Down)
+			Select: Gostand(default binded to X)
+			Back/Exit: Stance(default binded to O)

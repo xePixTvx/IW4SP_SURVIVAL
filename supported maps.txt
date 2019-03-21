@@ -1,0 +1,22 @@
+Spec Ops:
+		The Pit(so_killspree_trainer) - Unlock All Map
+		Hidden(so_hidden_so_ghillies)
+		O Cristo Redentor(so_killspree_favela)
+		Estate Takedown(so_takeover_estate)
+		Sniper Fi(so_rooftop_contingency)
+		Snatch & Grab(so_intel_boneyard)
+		Armor Piercing(so_takeover_oilrig)
+		Body Count(so_killspree_invasion)
+                Breach & Clear(so_showers_gulag)
+                Wardriving(so_download_arcadia)
+		Acceptable Losses(so_sabotage_cliffhanger)
+
+Singleplayer:
+		S.S.D.D.(trainer) - Unlock All Map
+		No Russian(airport)
+                Cliffhanger(cliffhanger)
+
+
+
+
+Cleaned but not finished maps:		

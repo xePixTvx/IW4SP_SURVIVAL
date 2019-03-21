@@ -1,0 +1,34 @@
+----------- 0.1 -----------
+# wave setup changed(bot amount,health....) 
+# bots are now dropping weapons and ammo until weapon shop is unlocked
+# support shop added(player can now buy armor and extra weaponslots....)
+# notifycations when a shop is unlocked 
+# hitmarkers enabled
+# added Delta Squad(not all maps support it)
+# added Mortar Strike(not all maps support it)
+# added map so_rooftop_contingency(Sniper Fi)
+# added map so_intel_boneyard(Snatch & Grab)
+-----------------------------------------------------------------------------------------------------------
+
+----------- 0.2 -----------
+#unlock all shouldn't freeze ps3 anymore
+#added helicopters(not all maps support it)
+#added map so_takeover_oilrig(Armor Piercing)
+#added map so_killspree_invasion(Body Count)
+#added Predator Missile(not all maps support it)
+-----------------------------------------------------------------------------------------------------------
+
+----------- 0.3 -----------
+#changed wave setup system(now its easier to change bot amount,health.....)
+#some other little code changes to make map adding easier
+#added map cliffhanger(Cliffhanger)
+#added map so_showers_gulag(Breach & Clear)
+#added map so_download_arcadia(Wardriving)
+-----------------------------------------------------------------------------------------------------------
+
+----------- 0.4 -----------
+#changed bot setups bots have more health now
+#more juggernaut & dog waves
+#changed shop menu position
+#added map so_sabotage_cliffhanger(Acceptable Losses)
+-----------------------------------------------------------------------------------------------------------

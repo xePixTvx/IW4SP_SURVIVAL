@@ -1,0 +1,30 @@
+----------- DEVELOPER INFO -----------
+#for ps3 maps\_remotemissile.gsc needs to be compiled into the patch.ff file!(idk about xbox)
+-----------------------------------------------------------------------------------------------------------
+
+more stuff for the support shop(sentry guns?,ah6?)
+and alot of more stuff
+
+
+
+
+
+
+
+//some shaders
+arcademode_life
+PreCacheShader( "hud_grenadeicon" );
+
+PreCacheShader( "hud_grenadepointer" );
+
+PreCacheShader( "hud_burningcaricon" );
+
+PreCacheShader( "death_juggernaut" );
+
+PreCacheShader( "death_friendly_fire" );
+
+PreCacheShader( "hud_destructibledeathicon" );
+
+PreCacheShader( "hud_burningbarrelicon" );
+	
+PreCacheShader( "waypoint_ammo" );
