@@ -66,26 +66,83 @@ _enemyHeli_rampupdamage(eHeli)
 	i = 0;
 	while((isdefined(eHeli))&&(i<heli_damage_ramp_loops))
 	{
-		level.player waittill("damage",amount,attacker);
-		if(!isdefined(eHeli))
+		foreach(player in getPlayers())
 		{
-			break;
-		}
-		if(!isdefined(eHeli.mgturret))
-		{
-			break;
-		}
-		if ((isdefined(attacker))&&(isdefined(eHeli.mgturret))&&(is_in_array(eHeli.mgturret,attacker)))
-		{
-			level.player enableInvulnerability();
-			wait(heli_damage_delay);
-			i++;
-			heli_damage_delay = heli_damage_delay/1.3;
-			level.player disableInvulnerability();
+			player waittill("damage",amount,attacker);
+			if(!isdefined(eHeli))
+			{
+				break;
+			}
+			if(!isdefined(eHeli.mgturret))
+			{
+				break;
+			}
+			if ((isdefined(attacker))&&(isdefined(eHeli.mgturret))&&(is_in_array(eHeli.mgturret,attacker)))
+			{
+				player enableInvulnerability();
+				wait(heli_damage_delay);
+				i++;
+				heli_damage_delay = heli_damage_delay/1.3;
+				player disableInvulnerability();
+			}
 		}
 	}
-	level.player disableInvulnerability();
+	foreach(player in getPlayers())
+	{
+		player disableInvulnerability();
+	}
 }
+
+
+
+
+
+test_friendly_heli()//testing on cliffhanger map
+{
+	for(;;)
+	{
+		if(self buttonPressed("enter"))
+		{
+			thread _spawnFriendlyHeli("cobra");
+			wait .5;
+		}
+		wait 0.05;
+	}
+}
+
+_spawnFriendlyHeli(targetname)
+{
+	heliSpawner = getent(targetname,"targetname");
+	//heliSpawner.origin = heliSpawner.origin;
+	heliSpawner.script_forcespawn = true;
+	heliSpawner.script_playerseek = true;
+	heliSpawner.script_avoidvehicles = true;
+	heliSpawner.script_vehicle_selfremove = undefined;
+	heliSpawner.script_team = "allies";
+	eHeli = spawn_vehicle_from_targetname_and_drive(targetname);
+	eHeli endon("death");
+	eHeli.survival_owner = level.player;
+	wait 1;
+	eHeli thread _friendlyHeli_follow_owner_monitor();
+	//iprintln("health: " + eHeli.health);
+}
+_friendlyHeli_death_monitor()
+{
+}
+_friendlyHeli_follow_owner_monitor()
+{
+	self endon("death");
+	for(;;)
+	{
+		self setVehGoalPos( self.survival_owner.origin+(0,0,700), true );
+		self setGoalYaw( self.survival_owner.angles );
+		wait 0.05;
+	}
+}
+
+
+
+
 
 
 /*

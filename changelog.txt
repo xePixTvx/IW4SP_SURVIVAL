@@ -32,3 +32,8 @@
 #changed shop menu position
 #added map so_sabotage_cliffhanger(Acceptable Losses)
 -----------------------------------------------------------------------------------------------------------
+
+----------- 0.5 -----------
+#fixed heli damage stuff for player2
+#fixed bug that resets bot amount to 20 after wave 10
+-----------------------------------------------------------------------------------------------------------

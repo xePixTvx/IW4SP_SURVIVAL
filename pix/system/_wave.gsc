@@ -330,14 +330,14 @@ wave_default_scheme()
 	else if(level.Wave>10 && level.Wave<16)
 	{
 		level.intermissionTime = 15;
-		level.default_botsForWave = 20;
+		level.default_botsForWave += 2;
 		pix\bot\_bot::setUpBotsForWave(level.default_botsForWave,level.dog_botsForWave,level.jugger_botsForWave);
 		pix\bot\_bot::setUpBotSettings("default",160,15,60,80);
 	}
 	else if(level.Wave>=16 && level.Wave<20)
 	{
 		level.intermissionTime = 15;
-		level.default_botsForWave = 30;
+		level.default_botsForWave += 2;
 		pix\bot\_bot::setUpBotsForWave(level.default_botsForWave,level.dog_botsForWave,level.jugger_botsForWave);
 		pix\bot\_bot::setUpBotSettings("default",220,15,70,100);
 	}

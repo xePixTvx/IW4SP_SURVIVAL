@@ -6,7 +6,7 @@
 
 _start_IW4SP_Survival()
 {
-	level.iw4sp_survival_version = 0.4;
+	level.iw4sp_survival_version = 0.5;
 	objective_add(0,"current", "Survive!");
 	objective_add(1,"current", " ");
 	objective_add(2,"current", " ");
