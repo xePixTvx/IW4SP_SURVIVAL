@@ -15,7 +15,7 @@ init()
 	level.dog_botsForWave = 0;
 	level.jugger_botsForWave = 0;
 	
-	level.intermissionTime = 10;
+	level.intermissionTime = 40;
 	
 	level thread init_bots();
 	level thread wave_count_hud_init();
@@ -34,6 +34,7 @@ watch_wave()
 	{
 		level waittill("next_wave");
 		level.pix_bots = [];
+		level thread _watch_players_skip_intermission();
 		level thread _doIntermission();
 		level waittill("intermission_done");
 		level.Wave ++;
@@ -64,9 +65,33 @@ watch_wave()
 
 
 
-
-
-
+_watch_players_skip_intermission()
+{
+	level endon("intermission_done");
+	getPlayer1().hasIntermissionSkipped = false;
+	getPlayer1() pix\player\_player::_showIntermissionSkipInfo();
+	if(is_coop())
+	{
+		getPlayer2().hasIntermissionSkipped = false;
+		getPlayer2() pix\player\_player::_showIntermissionSkipInfo();
+	}
+	for(;;)
+	{
+		foreach(player in getPlayers())
+		{
+			if(player AdsButtonPressed() && player MeleeButtonPressed())
+			{
+				if(!player.hasIntermissionSkipped)
+				{
+					player.hasIntermissionSkipped = true;
+					player pix\player\_player::_hideIntermissionSkipInfo();
+				}
+				wait .4;
+			}
+		}
+		wait 0.05;
+	}
+}
 _doIntermission()
 {
 	level.Intermission_hud = createServerText("objective",1.3,"CENTER","BOTTOM",0,-30,0,(1,1,1),0,(0.3,0.6,0.3),1);
@@ -76,6 +101,20 @@ _doIntermission()
 	wait .4;
 	for(i=level.intermissionTime;i>-1;i--)
 	{
+		if(!is_coop())
+		{
+			if(getPlayer1().hasIntermissionSkipped)
+			{
+				continue;
+			}
+		}
+		else
+		{
+			if(getPlayer1().hasIntermissionSkipped && getPlayer2().hasIntermissionSkipped)
+			{
+				continue;
+			}
+		}
 		level.Intermission_hud setValue(i);
 		foreach(player in getPlayers())
 		{
@@ -85,6 +124,10 @@ _doIntermission()
 		wait 1;
 	}
 	level notify("intermission_done");
+	foreach(player in getPlayers())
+	{
+		player pix\player\_player::_hideIntermissionSkipInfo();
+	}
 	level.Intermission_hud elemFadeOverTime(.4,0);
 	wait .4;
 	level.Intermission_hud destroy();
@@ -242,7 +285,7 @@ wave_spawn_helicopters()
 		wait .2;
 		thread pix\bot\_vehicle::_spawnEnemyHeli(level.waveHelicopters_targetname);
 	}
-	if(level.Wave>=40)
+	if(level.Wave>=40)//we should never have more than 2 helis at the same time
 	{
 		thread pix\bot\_vehicle::_spawnEnemyHeli(level.waveHelicopters_targetname);
 		wait .2;
@@ -277,9 +320,14 @@ wave_spawn_dogs()
 		level.dog_botsForWave = 10;
 		pix\bot\_bot::setUpBotSettings("dog",300,15,100,160);
 	}
-	else if(level.Wave>=40)
+	else if(level.Wave>=40 && level.Wave<50)
 	{
 		level.dog_botsForWave = 12;
+		pix\bot\_bot::setUpBotSettings("dog",340,20,120,180);
+	}
+	else if(level.Wave>=50)
+	{
+		level.dog_botsForWave = 16;
 		pix\bot\_bot::setUpBotSettings("dog",340,20,120,180);
 	}
 	else
@@ -306,10 +354,15 @@ wave_spawn_juggers()
 		level.jugger_botsForWave = 6;
 		pix\bot\_bot::setUpBotSettings("jugger",4400,15,220,150);
 	}
-	else if(level.Wave>=40)
+	else if(level.Wave==40||level.Wave==44||level.Wave==48)
 	{
 		level.jugger_botsForWave = 8;
 		pix\bot\_bot::setUpBotSettings("jugger",4600,20,250,180);
+	}
+	else if(level.Wave>=50)
+	{
+		level.jugger_botsForWave = 12;
+		pix\bot\_bot::setUpBotSettings("jugger",4800,20,280,200);
 	}
 	else
 	{
@@ -322,52 +375,58 @@ wave_default_scheme()
 {
 	if(level.Wave<=10)
 	{
-		level.intermissionTime = 10;
+		//level.intermissionTime = 10;
 		level.default_botsForWave += 2;
 		pix\bot\_bot::setUpBotsForWave(level.default_botsForWave,level.dog_botsForWave,level.jugger_botsForWave);
 		pix\bot\_bot::setUpBotSettings("default",120,5,50,80);
 	}
 	else if(level.Wave>10 && level.Wave<16)
 	{
-		level.intermissionTime = 15;
+		//level.intermissionTime = 15;
 		level.default_botsForWave += 2;
 		pix\bot\_bot::setUpBotsForWave(level.default_botsForWave,level.dog_botsForWave,level.jugger_botsForWave);
 		pix\bot\_bot::setUpBotSettings("default",160,15,60,80);
 	}
 	else if(level.Wave>=16 && level.Wave<20)
 	{
-		level.intermissionTime = 15;
+		//level.intermissionTime = 15;
 		level.default_botsForWave += 2;
 		pix\bot\_bot::setUpBotsForWave(level.default_botsForWave,level.dog_botsForWave,level.jugger_botsForWave);
 		pix\bot\_bot::setUpBotSettings("default",220,15,70,100);
 	}
 	else if(level.Wave>=20 && level.Wave<30)
 	{
-		level.intermissionTime = 20;
+		//level.intermissionTime = 20;
 		level.default_botsForWave += 2;
 		pix\bot\_bot::setUpBotsForWave(level.default_botsForWave,level.dog_botsForWave,level.jugger_botsForWave);
 		pix\bot\_bot::setUpBotSettings("default",260,15,70,100);
 	}
 	else if(level.Wave>=30 && level.Wave<40)
 	{
-		level.intermissionTime = 20;
+		//level.intermissionTime = 20;
 		level.default_botsForWave += 2;
 		pix\bot\_bot::setUpBotsForWave(level.default_botsForWave,level.dog_botsForWave,level.jugger_botsForWave);
 		pix\bot\_bot::setUpBotSettings("default",300,30,120,150);
 	}
-	else if(level.Wave>=40)
+	else if(level.Wave>=40 && level.Wave<50)
 	{
-		level.intermissionTime = 30;
-		level.default_botsForWave = 400;
+		level.default_botsForWave += 2;
 		pix\bot\_bot::setUpBotsForWave(level.default_botsForWave,level.dog_botsForWave,level.jugger_botsForWave);
-		pix\bot\_bot::setUpBotSettings("default",340,40,150,200);
+		pix\bot\_bot::setUpBotSettings("default",420,50,200,250);
+	}
+	else if(level.Wave>=50)
+	{
+		//level.intermissionTime = 30;
+		level.default_botsForWave = 600;
+		pix\bot\_bot::setUpBotsForWave(level.default_botsForWave,level.dog_botsForWave,level.jugger_botsForWave);
+		pix\bot\_bot::setUpBotSettings("default",450,60,220,270);
 	}
 	else
 	{
-		level.intermissionTime = 30;
-		level.default_botsForWave = 400;
+		//level.intermissionTime = 30;
+		level.default_botsForWave = 600;
 		pix\bot\_bot::setUpBotsForWave(level.default_botsForWave,level.dog_botsForWave,level.jugger_botsForWave);
-		pix\bot\_bot::setUpBotSettings("default",340,40,150,200);
+		pix\bot\_bot::setUpBotSettings("default",450,60,220,270);
 	}
 	thread pix\system\_wave::enemy_count_hud_nextWave();
 	thread pix\bot\_bot::_spawnBots();

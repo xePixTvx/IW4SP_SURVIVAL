@@ -37,3 +37,8 @@
 #fixed heli damage stuff for player2
 #fixed bug that resets bot amount to 20 after wave 10
 -----------------------------------------------------------------------------------------------------------
+
+----------- 0.6 -----------
+#intermission time set to 40 seconds + can be skipped now
+#more waves
+-----------------------------------------------------------------------------------------------------------

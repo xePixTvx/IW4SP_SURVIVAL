@@ -40,6 +40,9 @@ init()//init player
 										 //if the detonator weapon is already given just enable it(uav/remote stuff gets disabled after remote_missile_exploded is notified)
 										 //its a server thing so maybe it causes bugs
 	
+	
+	self.hasIntermissionSkipped = false;
+	
 	self thread initButtons();//mostly used for the non host player
 	self thread flying_intro_custom();
 	
@@ -124,6 +127,8 @@ _createHud()//create player hud
 	self.currentHint = "";
 	self.Hud["hint"] = createText("default",1.5,"MIDDLE",undefined,0,30,0,(1,1,1),1,(0,1,0),0,self.currentHint);
 	
+	self.Hud["skip_intermission_info"] = createText("objective",1.3,"CENTER","BOTTOM",0,-10,0,(1,1,1),0,(0,1,0),0,"Press ^3[{+toggleads_throw}]^7 + ^3[{+melee}]^7 to Skip!");
+	
 	
 	wait .4;
 	self.Hud["Line"] elemFadeOverTime(.7,1);
@@ -179,6 +184,14 @@ _hideArmorHud()
 	self.Hud["Armor_text"] elemFadeOverTime(.7,0);
 }
 
+_showIntermissionSkipInfo()
+{
+	self.Hud["skip_intermission_info"] elemFadeOverTime(.4,1);
+}
+_hideIntermissionSkipInfo()
+{
+	self.Hud["skip_intermission_info"] elemFadeOverTime(.4,0);
+}
 
 //lowermsg system from mp?
 _setHint(text)
