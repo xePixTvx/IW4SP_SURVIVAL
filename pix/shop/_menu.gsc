@@ -28,19 +28,24 @@ open_Shop(type)
 	for(;;)
 	{
 		self freezeControls(true);
-		if(self menuGetButton("scroll_up")||self menuGetButton("scroll_down"))
+		if(self SecondaryOffHandButtonPressed())
 		{
-			self.shop_scroller[self.shop_currentMenu] -= self menuGetButton("scroll_up");
-			self.shop_scroller[self.shop_currentMenu] += self menuGetButton("scroll_down");
+			self.shop_scroller[self.shop_currentMenu] --;
 			self _scroll_update();
 			wait .124;
 		}
-		if(self menuGetButton("select"))
+		if(self AttackButtonPressed())
+		{
+			self.shop_scroller[self.shop_currentMenu] ++;
+			self _scroll_update();
+			wait .124;
+		}
+		if(self UseButtonPressed())
 		{
 			self thread [[self.Shop_Menu[self.shop_currentMenu].func[self.shop_scroller[self.shop_currentMenu]]]](self.Shop_Menu[self.shop_currentMenu].input1[self.shop_scroller[self.shop_currentMenu]],self.Shop_Menu[self.shop_currentMenu].input2[self.shop_scroller[self.shop_currentMenu]]);
 			wait .4;
 		}
-		if(self menuGetButton("back"))
+		if(self MeleeButtonPressed())
 		{
 			if(self.Shop_Menu[self.shop_currentMenu].parent == "Exit")
 			{

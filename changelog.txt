@@ -42,3 +42,7 @@
 #intermission time set to 40 seconds + can be skipped now
 #more waves
 -----------------------------------------------------------------------------------------------------------
+
+----------- 0.7 -----------
+#changed some things on the shop menus(hopefully it fixes the problems in coop mode) --- read shop menu controls.txt
+-----------------------------------------------------------------------------------------------------------
